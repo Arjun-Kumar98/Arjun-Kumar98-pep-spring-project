@@ -48,10 +48,44 @@ public class SocialMediaController {
     }catch(RuntimeException e){
         return ResponseEntity.status(400).body(null);
     }
+}
+
+    @PostMapping("/login")
+    public ResponseEntity<Account> loginUser(@RequestBody Account account){
+        try{
+            Account acct = accountService.loginUser(account);
+            if(acct!=null){
+                return ResponseEntity.ok(acct);
+            }
+            return ResponseEntity.status(401).body(null);
+        }catch(RuntimeException e){
+            return ResponseEntity.status(401).body(null);
+        }
+    }
+
+    @PostMapping("/messages")
+    public ResponseEntity<Message> createMessage(@RequestBody Message message){
+        try{
+        Optional<Account> acct = accountService.retrieveUserByUserId(message.getPostedBy());
+        if(acct!=null){ 
+        Message msg = messageService.createMessage(message);
+       
+        if(msg!=null){
+            return ResponseEntity.ok(msg);
+        }else{
+            return ResponseEntity.status(400).body(null);
+        }
+    }else{
+        return ResponseEntity.status(400).body(null);
+    }
+}catch(RuntimeException e){
+    return ResponseEntity.status(400).body(null);
+}
+    }
 
 
     }
     
 
 
-}
+

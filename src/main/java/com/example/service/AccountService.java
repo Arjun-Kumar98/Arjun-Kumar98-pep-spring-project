@@ -16,6 +16,10 @@ public class AccountService {
         return accountRepository.findByUsername(username);
     }
     
+    public Optional<Account> retrieveUserByUserId(int userId){
+        return accountRepository.findById(userId);
+    }
+
     public Account registerUser(Account account){
        if((!account.getUsername().isBlank())&&(account.getPassword().length()>=4)){
         return accountRepository.save(account);

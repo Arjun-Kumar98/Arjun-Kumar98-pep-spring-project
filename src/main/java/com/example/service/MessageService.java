@@ -15,7 +15,7 @@ public class MessageService {
 
     public Message createMessage(Message message){
         String msg = message.getMessageText();
-        if(!msg.isBlank() && msg.length()>=255){
+        if(!msg.isBlank() && msg.length()<=255){
             return messageRepository.save(message);
         }
         return null;
