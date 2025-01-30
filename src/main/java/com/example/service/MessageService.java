@@ -37,7 +37,7 @@ public class MessageService {
          messageRepository.deleteById(messageId);
     }
     public Message updateMessageById(int messageId,String messageTxt){
-           if(!messageTxt.isBlank()&&messageTxt.length()>=255){
+           if(!messageTxt.isBlank()&&messageTxt.length()<=255){
            Optional<Message> optMessage = messageRepository.findById(messageId);
            if(optMessage.isPresent()){
               Message msg = optMessage.get();

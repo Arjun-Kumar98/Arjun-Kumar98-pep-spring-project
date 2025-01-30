@@ -107,6 +107,31 @@ public class SocialMediaController {
                  }
    }
 
+   @PatchMapping("/messages/{messageId}")
+   public ResponseEntity<Integer> updateMessageById(@RequestBody Message msg,@PathVariable("messageId") int msgId){
+    try{
+    Message message = messageService.retrieveMessageById(msgId);
+    if(message!=null){
+      Message messages = messageService.updateMessageById(msgId,msg.getMessageText());
+      if(messages!=null){
+        return ResponseEntity.status(200).body(1);
+      }else{
+        return ResponseEntity.status(400).body(null);
+      }
+    }
+    return ResponseEntity.status(400).body(null);
+}catch(RuntimeException e){
+    return ResponseEntity.status(400).body(null);
+}
+  
+   }
+
+   @GetMapping("/accounts/{accountId}/messages")
+   public ResponseEntity<List<Message>> retrieveMessagesByUserId(@PathVariable("accountId") int acctId){
+    List<Message> msgList = messageService.retrieveAllMessagesByUserId(acctId);
+    return ResponseEntity.ok(msgList);
+   }
+
     }
     
 
