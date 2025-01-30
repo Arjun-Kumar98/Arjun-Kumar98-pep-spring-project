@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.List;
 
 import com.example.service.AccountService;
 import com.example.service.MessageService;
@@ -83,6 +84,28 @@ public class SocialMediaController {
 }
     }
 
+    @GetMapping("/messages")
+    public ResponseEntity<List<Message>> retrieveAllMessages(){
+        List<Message> msgList = messageService.retrieveAllMessages();
+        return ResponseEntity.ok(msgList);
+    }
+
+    @GetMapping("/messages/{messageId}")
+    public ResponseEntity<Message> retrieveMessageById(@PathVariable("messageId") int msgId){
+              Message msg = messageService.retrieveMessageById(msgId);
+              return ResponseEntity.ok(msg);
+    }
+
+   @DeleteMapping("/messages/{messageId}")
+   public ResponseEntity<Integer> deleteMessageById(@PathVariable("messageId") int msgId){
+                 Message msg = messageService.retrieveMessageById(msgId);
+                 if(msg!=null){
+                    messageService.deleteMessageById(msgId);
+                    return ResponseEntity.ok().body(1);
+                 }else{
+                    return ResponseEntity.ok().body(null);
+                 }
+   }
 
     }
     
