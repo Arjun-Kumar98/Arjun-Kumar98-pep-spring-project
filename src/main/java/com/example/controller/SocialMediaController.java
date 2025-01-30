@@ -36,7 +36,7 @@ public class SocialMediaController {
         try{
         Optional<Account> optAccount = accountService.retrieveUserByUsername(account.getUsername());
         System.out.println("the opt account is == "+optAccount);
-        if(optAccount==null){
+        if(!optAccount.isPresent()){
             Account acct = accountService.registerUser(account);
             return ResponseEntity.ok(acct);
         }else{
