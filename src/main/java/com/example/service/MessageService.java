@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.repository.MessageRepository;
 
+
 public class MessageService {
     @Autowired
     MessageRepository messageRepository;
@@ -32,5 +33,21 @@ public class MessageService {
 
     public void deleteMessageById(int messageId){
          messageRepository.deleteById(messageId);
+    }
+    public Message updateMessageById(int messageId,String messageTxt){
+           if(!messageTxt.isBlank()&&messageTxt.length()>=255){
+           Optional<Message> optMessage = messageRepository.findById(messageId);
+           if(optMessage.isPresent()){
+              Message msg = optMessage.get();
+              msg.setMessageText(messageTxt);
+              return messageRepository.save(msg);
+           }
+           return null;
+        }
+           return null;
+    }
+
+    public List<Message> retrieveAllMessagesByUserId(int userId){
+        return messageRepository.findByPostedBy(userId);
     }
 }
