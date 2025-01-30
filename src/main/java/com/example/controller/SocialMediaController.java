@@ -3,9 +3,6 @@ import com.example.entity.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
@@ -127,7 +124,7 @@ public class SocialMediaController {
    }
 
    @GetMapping("/accounts/{accountId}/messages")
-   public ResponseEntity<List<Message>> retrieveMessagesByUserId(@PathVariable("accountId") int acctId){
+   public ResponseEntity<List<Message>> retrieveAllMessagesByUserId(@PathVariable("accountId") int acctId){
     List<Message> msgList = messageService.retrieveAllMessagesByUserId(acctId);
     return ResponseEntity.ok(msgList);
    }
