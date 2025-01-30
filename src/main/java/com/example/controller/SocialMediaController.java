@@ -1,4 +1,5 @@
 package com.example.controller;
+import com.example.entity.*;
 
 
 /**
@@ -8,5 +9,10 @@ package com.example.controller;
  * refer to prior mini-project labs and lecture materials for guidance on how a controller may be built.
  */
 public class SocialMediaController {
+    @RestController
+
+    @PostMapping("/register")
+    
+
 
 }
