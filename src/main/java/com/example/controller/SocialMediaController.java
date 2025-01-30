@@ -35,6 +35,7 @@ public class SocialMediaController {
     public ResponseEntity<Account> registerUser(@RequestBody Account account){
         try{
         Optional<Account> optAccount = accountService.retrieveUserByUsername(account.getUsername());
+        System.out.println("the opt account is == "+optAccount);
         if(optAccount==null){
             Account acct = accountService.registerUser(account);
             return ResponseEntity.ok(acct);
