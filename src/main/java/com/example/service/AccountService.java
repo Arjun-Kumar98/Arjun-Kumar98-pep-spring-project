@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import com.example.entity.Account;
-import com.example.repository.AccountRepository;;
+import com.example.repository.AccountRepository;
 
 @Service
 public class AccountService {
